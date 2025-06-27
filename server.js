@@ -1,82 +1,88 @@
 import express from "express";
 import bodyParser from "body-parser";
-import axios from "axios";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
-const port = 3000;
-const API_URL = "http://localhost:4000";
+const port = process.env.PORT || 4000;
 
-app.use(express.static("public"));
+// Helper for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Route to render the main page
-app.get("/", async (req, res) => {
-  try {
-    const response = await axios.get(`${API_URL}/posts`);
-    console.log(response);
-    res.render("index.ejs", { posts: response.data });
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching posts" });
-  }
+// In-memory post store
+let posts = [
+  {
+    id: 1,
+    title: "The Rise of Decentralized Finance",
+    content: "DeFi is a revolution...",
+    author: "Alex Thompson",
+    date: "2023-08-01",
+  },
+  {
+    id: 2,
+    title: "Impact of AI on Businesses",
+    content: "AI is reshaping industries...",
+    author: "Mia Williams",
+    date: "2023-08-05",
+  },
+];
+let lastId = posts.length;
+
+// Routes
+app.get("/", (req, res) => {
+  res.render("index", { posts });
 });
 
-// Route to render the edit page
 app.get("/new", (req, res) => {
-  res.render("modify.ejs", { heading: "New Post", submit: "Create Post" });
+  res.render("modify", { heading: "New Post", submit: "Create Post" });
 });
 
-app.get("/edit/:id", async (req, res) => {
-  try {
-    const response = await axios.get(`${API_URL}/posts/${req.params.id}`);
-    console.log(response.data);
-    res.render("modify.ejs", {
-      heading: "Edit Post",
-      submit: "Update Post",
-      post: response.data,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching post" });
-  }
+app.get("/edit/:id", (req, res) => {
+  const post = posts.find(p => p.id === parseInt(req.params.id));
+  if (!post) return res.status(404).send("Post not found");
+  res.render("modify", {
+    heading: "Edit Post",
+    submit: "Update Post",
+    post,
+  });
 });
 
-// Create a new post
-app.post("/api/posts", async (req, res) => {
-  try {
-    const response = await axios.post(`${API_URL}/posts`, req.body);
-    console.log(response.data);
-    res.redirect("/");
-  } catch (error) {
-    res.status(500).json({ message: "Error creating post" });
-  }
+// API logic
+app.post("/api/posts", (req, res) => {
+  const newPost = {
+    id: ++lastId,
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    date: new Date().toISOString().slice(0, 10),
+  };
+  posts.push(newPost);
+  res.redirect("/");
 });
 
-// Partially update a post
-app.post("/api/posts/:id", async (req, res) => {
-  console.log("called");
-  try {
-    const response = await axios.patch(
-      `${API_URL}/posts/${req.params.id}`,
-      req.body
-    );
-    console.log(response.data);
-    res.redirect("/");
-  } catch (error) {
-    res.status(500).json({ message: "Error updating post" });
-  }
+app.post("/api/posts/:id", (req, res) => {
+  const post = posts.find(p => p.id === parseInt(req.params.id));
+  if (!post) return res.status(404).send("Post not found");
+  post.title = req.body.title;
+  post.content = req.body.content;
+  post.author = req.body.author;
+  res.redirect("/");
 });
 
-// Delete a post
-app.get("/api/posts/delete/:id", async (req, res) => {
-  try {
-    await axios.delete(`${API_URL}/posts/${req.params.id}`);
-    res.redirect("/");
-  } catch (error) {
-    res.status(500).json({ message: "Error deleting post" });
-  }
+app.get("/api/posts/delete/:id", (req, res) => {
+  posts = posts.filter(p => p.id !== parseInt(req.params.id));
+  res.redirect("/");
 });
 
+// Start
 app.listen(port, () => {
-  console.log(`Backend server is running on http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
