@@ -20,7 +20,6 @@ This is a full-stack blog web application that allows users to create, view, edi
 🧠 In-Memory Data – No database used; data stored in memory (ideal for demonstration or learning).
 
 # Technical Overview (Behind the Scenes) :
-📦 Tech Stack
 
 Frontend:
 
