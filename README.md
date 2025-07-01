@@ -21,6 +21,7 @@ This is a full-stack blog web application that allows users to create, view, edi
 
 # Technical Overview (Behind the Scenes) :
 📦 Tech Stack
+
 Frontend:
 
 EJS templates for dynamic rendering (index.ejs, modify.ejs)
