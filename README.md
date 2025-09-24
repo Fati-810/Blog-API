@@ -1,6 +1,6 @@
 # Blog-API
 
-This is a full-stack blog web application that allows users to create, view, edit, and delete blog posts. It features a clean user interface with responsive design and leverages an Express.js REST API as its backend. The app is ideal for learning or demonstrating CRUD operations with a simple UI.
+This is a **full-stack blog web application** that allows users to create, view, edit, and delete blog posts. It features a clean user interface with responsive design and leverages an Express.js REST API as its backend. The app is **ideal** for learning or demonstrating **CRUD operations** with a **simple UI**.
 
 # Features
 📝 Create Post – Add a new blog post with title, content, and author.
@@ -23,9 +23,9 @@ This is a full-stack blog web application that allows users to create, view, edi
 
 Frontend:
 
-EJS templates for dynamic rendering (index.ejs, modify.ejs)
+EJS Templates for dynamic rendering
 
-main.css for responsive, modern styling
+CSS for responsive, modern styling
 
 Backend:
 
