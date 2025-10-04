@@ -23,43 +23,43 @@ This is a **full-stack blog web application** that allows users to create, view,
 
 Frontend:
 
-EJS Templates for dynamic rendering
+EJS Templates for dynamic rendering.
 
-CSS for responsive, modern styling
+CSS for responsive, modern styling.
 
 Backend:
 
-Express.js as the web server
+Express.js as the web server.
 
-Axios for server-to-server API communication
+Axios for server-to-server API communication.
 
-Body-parser middleware for handling form and JSON input
+Body-parser middleware for handling form and JSON input.
 
 API (Microservice Architecture):
 
-Runs separately on port 4000
+Runs separately on port 4000.
 
 RESTful routes:
 
-GET /posts – Fetch all posts
+GET /posts – Fetch all posts.
 
-GET /posts/:id – Get a specific post
+GET /posts/:id – Get a specific post.
 
-POST /posts – Add a new post
+POST /posts – Add a new post.
 
-PATCH /posts/:id – Update specific fields of a post
+PATCH /posts/:id – Update specific fields of a post.
 
-DELETE /posts/:id – Delete a post
+DELETE /posts/:id – Delete a post.
 
 Main App Server:
 
-Runs on port 3000
+Runs on port 3000.
 
-Renders frontend views and routes traffic through internal API
+Renders frontend views and routes traffic through internal API.
 
 Data Storage:
 
-Temporary, in-memory array (no persistent storage)
+Temporary, in-memory array (no persistent storage).
 
 # Link:
 https://blog-api-yaw2.onrender.com/
