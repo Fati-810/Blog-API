@@ -2,7 +2,7 @@
 
 This is a **full-stack blog web application** that allows users to create, view, edit, and delete blog posts. It features a clean user interface with responsive design and leverages an Express.js REST API as its backend. The app is **ideal** for learning or demonstrating **CRUD operations** with a **simple UI**.
 
-# Features
+## Features
 📝 Create Post – Add a new blog post with title, content, and author.
 
 📖 View Posts – Homepage displays a list of blog entries dynamically.
@@ -19,7 +19,7 @@ This is a **full-stack blog web application** that allows users to create, view,
 
 🧠 In-Memory Data – No database used; data stored in memory (ideal for demonstration or learning).
 
-# Technical Overview (Behind the Scenes) :
+## Technical Overview (Behind the Scenes) :
 
 Frontend:
 
@@ -61,5 +61,16 @@ Data Storage:
 
 Temporary, in-memory array (no persistent storage).
 
-# Link:
+## Preview:
 https://blog-api-yaw2.onrender.com/
+
+## Contact:
+If you'd like to see more of my work, connect with me through my portfolio:
+
+Developer: Fatimah Ali
+Website: fatimahdigitaledge.com
+GitHub: github.com/fati-810
+
+## License:
+This project is for educational and portfolio purposes.
+
